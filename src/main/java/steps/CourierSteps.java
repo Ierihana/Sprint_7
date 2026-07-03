@@ -9,8 +9,8 @@ import static io.restassured.RestAssured.given;
 
 public class CourierSteps {
 
-    @Step
-    public static Response createCourier(CourierModel courier){
+    @Step("Создание курьера: {courier}")
+    public static Response createCourier(CourierModel courier) {
 
         return given()
                 .log().all()
@@ -23,8 +23,8 @@ public class CourierSteps {
                 .extract().response();
     }
 
-    @Step
-    public static Response loginCourier(CourierModel courier){
+    @Step("Авторизация курьера с логином {courier.login} и паролем.")
+    public static Response loginCourier(CourierModel courier) {
         return given()
                 .header("Content-type", "application/json")
                 .and()
@@ -34,15 +34,11 @@ public class CourierSteps {
                 .then()
                 .extract().response();
 
-
-
     }
 
-    @Step
-    public static void deleteCourier(String courierId){
-        given()
-                .delete(COURIER_CREATE_PATH + "/" + courierId);
-
+    @Step("Удаление курьера по id {courierId}")
+    public static void deleteCourier(String courierId) {
+        given().delete(COURIER_CREATE_PATH + "/{courierId}", courierId);
     }
 
 

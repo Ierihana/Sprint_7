@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 public class OrderSteps {
 
 
-    @Step
+    @Step("Создание заказа с данными: {orderModel}")
     public static Response createOrder(OrderModel orderModel) {
         return given()
                 .log().all()
@@ -27,7 +27,7 @@ public class OrderSteps {
     }
 
 
-    @Step
+    @Step("Отмена заказа по трек-номеру: {orderTrack}")
     public static void cancelOrder(String orderTrack) {
        CancelOrderModel cancelOrderModel = new CancelOrderModel(orderTrack);
 
@@ -38,7 +38,7 @@ public class OrderSteps {
                 .put(CANCEL_ORDER_PATH);
     }
 
-    @Step
+    @Step("Получение списка всех заказов")
     public static Response getOrderList(){
         return given()
                 .get(GET_ORDER_LIST)
